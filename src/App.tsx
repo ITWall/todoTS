@@ -8,13 +8,9 @@ function App() {
   let id: string = uuidv4();
   const [tasks, setTasks] = useState<Task[]>([]);
 
-  let handleClickDeleteTask = (task: Task) => {
-    deleteTask(task);
-  };
-
   let renderTaskUI = () => {
     let tasksUI: Object[] = [];
-    for (let task of tasks) {
+    tasks.forEach((task) => {
       tasksUI.push(
         <tr key={task.id}>
           <td className="centerTableData id">{task.id}</td>
@@ -53,9 +49,10 @@ function App() {
           </td>
         </tr>
       );
-    }
+    });
+
     return tasksUI;
-  }
+  };
 
   let createTask = (event: any) => {
     event.preventDefault();
@@ -73,7 +70,6 @@ function App() {
       status: "in progress",
     };
     setTasks((tasks) => [...tasks, newTask]);
-    
   };
 
   let deleteTask = (task: Task) => {
